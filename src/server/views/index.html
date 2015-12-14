@@ -28,7 +28,7 @@
 
       $('#call').on('click', function() {
         Twilio.Device.connect({
-          CallerId:'{% twilioNumber %}'
+          PhoneNumber:'{% numberToCall %}'
         });
       });
 

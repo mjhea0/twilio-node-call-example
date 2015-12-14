@@ -9,7 +9,7 @@ var config = require('../../_config.js');
 router.get('/', function(req, res, next) {
 
   var capability = new twilio.Capability(
-    config.accountSid,
+    config.accountSID,
     config.authToken
   );
 
@@ -17,30 +17,30 @@ router.get('/', function(req, res, next) {
 
   res.render('index', {
       token: capability.generate(),
-      twilioNumber: config.TWILIO_NUMBER
+      numberToCall: ''  // +15556667777
   });
 
 });
 
 
-router.get('/data', function(req, res, next){
+// router.get('/data', function(req, res, next){
 
-    var phoneNumber = 'XXXXXXXXXX';
+//     var phoneNumber = 'XXXXXXXXXX';
 
-    var callData = {
-      'Dial': {
-        '@': {
-          'action' : '/forward?Dial=true',
-          'callerId': 'XXXXXXXXXX'
-        },
-        'Number': {
-          '#' : phoneNumber
-        }
-      }
-    };
+//     var callData = {
+//       'Dial': {
+//         '@': {
+//           'action' : '/forward?Dial=true',
+//           'callerId': 'XXXXXXXXXX'
+//         },
+//         'Number': {
+//           '#' : phoneNumber
+//         }
+//       }
+//     };
 
-    res.header('Content-Type','text/xml').send(js2xml('Response', callData));
-});
+//     res.header('Content-Type','text/xml').send(js2xml('Response', callData));
+// });
 
 
 module.exports = router;

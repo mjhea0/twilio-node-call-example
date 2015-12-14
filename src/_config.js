@@ -1,8 +1,8 @@
 var twilio = {};
 
-twilio.accountSid = '';
-twilio.authToen = '';
+twilio.accountSID = '';
+twilio.authToken = '';
 twilio.appToken = '';
-twilio.TWILIO_NUMBER = '';
+twilio.YOUR_TWILIO_NUMBER = '';  // +15556667777
 
 module.exports = twilio;
