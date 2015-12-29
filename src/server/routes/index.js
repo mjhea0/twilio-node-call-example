@@ -7,40 +7,43 @@ var config = require('../../_config.js');
 
 
 router.get('/', function(req, res, next) {
+  res.render('index');
+});
 
+// generate a twilio capability token
+router.get('/token', function(req, res, next) {
   var capability = new twilio.Capability(
-    config.accountSID,
-    config.authToken
+    config.TWILIO_ACCOUNT_SID,
+    config.TWILIO_AUTH_TOKEN
   );
+  capability.allowClientOutgoing(config.TWILIO_APP_TOKEN);
+  res.send(capability.generate());
+});
 
-  capability.allowClientOutgoing(config.appToken);
-
-  res.render('index', {
-      token: capability.generate(),
-      numberToCall: ''  // +15556667777
-  });
-
+// generate a twilio capability token
+router.get('/number', function(req, res, next) {
+  res.send(config.TWILIO_NUMBER);
 });
 
 
-// router.get('/data', function(req, res, next){
+router.get('/data', function(req, res, next){
 
-//     var phoneNumber = 'XXXXXXXXXX';
+    var phoneNumber = 'XXXXXXXXXX';
 
-//     var callData = {
-//       'Dial': {
-//         '@': {
-//           'action' : '/forward?Dial=true',
-//           'callerId': 'XXXXXXXXXX'
-//         },
-//         'Number': {
-//           '#' : phoneNumber
-//         }
-//       }
-//     };
+    var callData = {
+      'Dial': {
+        '@': {
+          'action' : '/forward?Dial=true',
+          'callerId': 'XXXXXXXXXX'
+        },
+        'Number': {
+          '#' : phoneNumber
+        }
+      }
+    };
 
-//     res.header('Content-Type','text/xml').send(js2xml('Response', callData));
-// });
+    res.header('Content-Type','text/xml').send(js2xml('Response', callData));
+});
 
 
 module.exports = router;
